@@ -28,7 +28,7 @@ const Login = ({ showToast }) => {
         try {
             const data = await dispatch(login({ email, password }));
             if (data.payload.token && data.payload.isPaid) {
-                window.location.replace("http://localhost:3000/");
+                window.location.replace(process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3000/");
             } else {
                 if (data.payload === "Invalid credentials") {
                     return
@@ -37,9 +37,10 @@ const Login = ({ showToast }) => {
                 }
             }
         } catch (err) {
-            console.err(err, "error");
+            console.error(err, "error");
         }
     };
+    
 
     const handleToggle = () => {
         if (type === 'password') {
