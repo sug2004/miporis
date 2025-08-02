@@ -6,11 +6,12 @@ import Cookies from 'js-cookie';
 
 const initialState = {
     user: null,
-    token: Cookies.get('token') || null,
-    isAuthenticated: !!Cookies.get('token'),
+    token: localStorage.getItem('token') || null,
+    isAuthenticated: !!localStorage.getItem('token'),
     loading: false,
     error: null
 };
+
 
 export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
     try {
@@ -19,8 +20,7 @@ export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI
 
         if (token) {
             const decoded = jwtDecode(token);
-            //Cookies.set('token', token, { secure: true, sameSite: 'Strict', expires: 5, domain: '.miporis.com' });
-             Cookies.set('token', token, { secure: true, sameSite: 'Strict', expires: 5 });
+            localStorage.setItem('token', token);
             return { token, user: decoded, isPaid, message };
         } else {
             throw new Error('Invalid token received');
@@ -30,6 +30,7 @@ export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI
         return thunkAPI.rejectWithValue(errorMsg);
     }
 });
+
 
 export const signup = createAsyncThunk('auth/signup', async (userData, thunkAPI) => {
     try {
@@ -55,13 +56,12 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-             Cookies.remove('token');
-            //Cookies.remove('token', { domain: '.miporis.com' });
+            localStorage.removeItem('token');
             state.user = null;
             state.token = null;
             state.isAuthenticated = false;
             state.error = null;
-        },
+        },        
         setUser: (state, action) => {
             state.user = action.payload;
             state.isAuthenticated = true;
