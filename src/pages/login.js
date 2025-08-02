@@ -28,7 +28,8 @@ const Login = ({ showToast }) => {
             const data = await dispatch(login({ email, password }));
             if (data.payload.token && data.payload.isPaid) {
                 const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3000/";
-                window.location.replace(`${dashboardUrl}?token=${data.payload.token}`);
+                // Pass token as URL parameter
+                window.location.href = `${dashboardUrl}?token=${encodeURIComponent(data.payload.token)}`;
             } else {
                 if (data.payload === "Invalid credentials") {
                     return
@@ -40,6 +41,7 @@ const Login = ({ showToast }) => {
             console.error(err, "error");
         }
     };
+    
     
     
 
