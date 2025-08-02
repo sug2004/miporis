@@ -22,13 +22,13 @@ const Login = ({ showToast }) => {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const data = await dispatch(login({ email, password }));
             if (data.payload.token && data.payload.isPaid) {
-                window.location.replace(process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3000/");
+                const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3000/";
+                window.location.replace(`${dashboardUrl}?token=${data.payload.token}`);
             } else {
                 if (data.payload === "Invalid credentials") {
                     return
@@ -40,6 +40,7 @@ const Login = ({ showToast }) => {
             console.error(err, "error");
         }
     };
+    
     
 
     const handleToggle = () => {
