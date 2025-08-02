@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* LEMONMILK Light */
+@font-face {
+  font-family: 'lmk';
+  src: url('./fonts/milk/LEMONMILK-Light.otf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* LEMONMILK Regular */
+@font-face {
+  font-family: 'lmk';
+  src: url('./fonts/milk/LEMONMILK-Regular.otf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* LEMONMILK Medium */
+@font-face {
+  font-family: 'lmk';
+  src: url('./fonts/milk/LEMONMILK-Medium.otf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* LEMONMILK Bold */
+@font-face {
+  font-family: 'lmk';
+  src: url('./fonts/milk/LEMONMILK-Bold.otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CustomSerif'; /* Give your font a specific name */
+  src: url('./fonts/Serif.ttf') format('truetype'); /* Specify the format */
+  font-weight: normal; /* Adjust the weight as necessary */
+  font-style: normal; /* Adjust the style as necessary */
+}
